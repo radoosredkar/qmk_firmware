@@ -28,6 +28,7 @@ extern uint8_t is_master;
 #define _NUM_PAD 5
 #define _PROGRAMMING 6
 #define _GAMMING 7
+#define _BG2 8
 
 enum custom_keycodes {
 		QWERTY = SAFE_RANGE,
@@ -116,8 +117,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 						),
 		[_I3] = LAYOUT_split_3x6_3(
 						LGUI(KC_TAB), LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), 		LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0), KC_BSPC, 
-						SGUI(KC_LCTL), KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 									LGUI(KC_H), LGUI(KC_J), LGUI(KC_K), LGUI(KC_L), LGUI(KC_MINS), KC_LCTRL, 
-						KC_LSFT, TG(5), TG(6), TG(7), KC_NO, KC_NO, 									KC_NO, KC_NO, KC_NO, KC_NO, KC_INS, KC_RSFT, 
+						SGUI(KC_LCTL), KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 								LGUI(KC_H), LGUI(KC_J), LGUI(KC_K), LGUI(KC_L), LGUI(KC_MINS), KC_LCTRL, 
+						KC_LSFT, TG(5), TG(6), TG(7), TG(8), KC_NO, 									KC_NO, KC_NO, KC_NO, KC_NO, KC_INS, KC_RSFT, 
 						KC_LALT, KC_TRNS, KC_SPC, 														KC_ENT, KC_TRNS, KC_RALT
 						),
 		[_SYMBOL_SHIFT] = LAYOUT_split_3x6_3(
@@ -142,6 +143,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 						LCTL_T(KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G,	KC_1, KC_2, KC_3, KC_4, KC_5, KC_NO, 
 						KC_LSFT, KC_Z, KC_X, KC_TRNS, KC_V, KC_B, 		KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO, 
 						KC_LGUI, TG(7), KC_SPC, 						KC_ENT, TG(7), KC_RALT
+						),
+		[_BG2] = LAYOUT_split_3x6_3(
+						KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5, 				KC_Q, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+						LCTL_T(KC_ESC), KC_6, KC_EQL, KC_NO, KC_NO, KC_NO,	KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+						KC_LSFT, KC_I, KC_J, KC_M, KC_NO, KC_NO, 			KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+						KC_LGUI, TG(8), KC_SPC, 							KC_ENT, TG(8), KC_RALT
 						)
 
 };
@@ -278,11 +285,15 @@ const rgblight_segment_t PROGMEM my_layer2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 				{9, 2, HSV_MAGENTA}
 				);
+const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+				{9, 2, HSV_RED}
+				);
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 				my_layer1_layer,    // Overrides caps lock layer
 				my_layer2_layer,     // Overrides other layers
-				my_layer3_layer
+				my_layer3_layer,
+				my_layer4_layer
 				);
 
 extern rgblight_config_t rgblight_config;
@@ -298,6 +309,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 		rgblight_set_layer_state(0, layer_state_cmp(state, _NUM_PAD));
 		rgblight_set_layer_state(1, layer_state_cmp(state, _PROGRAMMING));
 		rgblight_set_layer_state(2, layer_state_cmp(state, _GAMMING));
+		rgblight_set_layer_state(3, layer_state_cmp(state, _BG2));
 		return state;
 }
 
