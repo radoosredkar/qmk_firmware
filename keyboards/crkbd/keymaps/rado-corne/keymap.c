@@ -29,6 +29,8 @@ extern uint8_t is_master;
 #define _PROGRAMMING 6
 #define _GAMMING 7
 #define _BG2 8
+#define _MOUSE 9
+#define _COMMANDOS 10
 
 enum custom_keycodes {
 		QWERTY = SAFE_RANGE,
@@ -117,8 +119,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 						),
 		[_I3] = LAYOUT_split_3x6_3(
 						LGUI(KC_TAB), LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), 		LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0), KC_BSPC, 
-						SGUI(KC_LCTL), KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 								LGUI(KC_H), LGUI(KC_J), LGUI(KC_K), LGUI(KC_L), LGUI(KC_MINS), KC_LCTRL, 
-						KC_LSFT, TG(5), TG(6), TG(7), TG(8), KC_NO, 									KC_NO, KC_NO, KC_NO, KC_NO, KC_INS, KC_RSFT, 
+						SGUI(KC_LCTL), KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_BTN1, 					LGUI(KC_H), LGUI(KC_J), LGUI(KC_K), LGUI(KC_L), LGUI(KC_MINS), KC_LCTRL, 
+						KC_LSFT, TG(5), TG(6), TG(7), TG(8), TG(10), 									TG(_MOUSE), KC_NO, KC_NO, KC_NO, KC_INS, KC_RSFT, 
 						KC_LALT, KC_TRNS, KC_SPC, 														KC_ENT, KC_TRNS, KC_RALT
 						),
 		[_SYMBOL_SHIFT] = LAYOUT_split_3x6_3(
@@ -134,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 						KC_LGUI,TG(5),KC_SPC,										KC_ENT,TG(5),KC_RALT
 						),
 		[_PROGRAMMING] = LAYOUT_split_3x6_3(
-						KC_TAB, LALT(KC_INS), LCA(KC_M), LSA(KC_ENT), KC_NO, KC_NO, 				KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+						KC_TAB, LALT(KC_INS), LCA(KC_M), LSA(KC_ENT), KC_NO, KC_NO, 		KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
 						LCTL_T(KC_ESC), KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 					KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_NO, KC_NO, 
 						KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 						KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TAB, 
 						KC_LGUI, TG(6), KC_NO, 												KC_ENT, TG(6), KC_RALT),
@@ -149,7 +151,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 						LCTL_T(KC_ESC), KC_6, KC_0, KC_F5, KC_F6, KC_F7,	KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
 						KC_LSFT, KC_I, KC_J, KC_M, KC_NO, KC_NO, 			KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
 						KC_LGUI, TG(8), KC_SPC, 							KC_ENT, TG(8), KC_RALT
-						)
+						),
+		[_MOUSE] = LAYOUT_split_3x6_3(
+						KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 			KC_NO, KC_WH_U, KC_NO, KC_NO, KC_NO, KC_NO, 
+						LCTL_T(KC_ESC), KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,	KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_BTN1, KC_BTN2, 
+						KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 		KC_NO, KC_WH_D, KC_NO, KC_NO, KC_NO, KC_NO, 
+						KC_LGUI, TG(_MOUSE), KC_SPC, 						KC_ENT, TG(_MOUSE), KC_RALT
+						),
+		[_COMMANDOS] = LAYOUT_split_3x6_3(
+						KC_NO, KC_1,    KC_2, KC_3, KC_4, KC_5, 			KC_6,  KC_7,  KC_8,  KC_9,  KC_0,  KC_NO, 
+						LCTL_T(KC_ESC), KC_X, KC_J, KC_G,  KC_M, KC_E,		KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+						KC_LSFT, KC_F,  KC_C, KC_S, KC_NO, KC_NO, 			KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+						KC_LGUI, TG(10), KC_SPC, 							KC_ENT, TG(10), KC_RALT
+						),
 
 };
 
@@ -288,12 +302,16 @@ const rgblight_segment_t PROGMEM my_layer3_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 const rgblight_segment_t PROGMEM my_layer4_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 				{9, 2, HSV_RED}
 				);
+const rgblight_segment_t PROGMEM my_layer5_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+				{9, 2, HSV_WHITE}
+				);
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 				my_layer1_layer,    // Overrides caps lock layer
 				my_layer2_layer,     // Overrides other layers
 				my_layer3_layer,
-				my_layer4_layer
+				my_layer4_layer,
+				my_layer5_layer
 				);
 
 extern rgblight_config_t rgblight_config;
@@ -310,6 +328,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 		rgblight_set_layer_state(1, layer_state_cmp(state, _PROGRAMMING));
 		rgblight_set_layer_state(2, layer_state_cmp(state, _GAMMING));
 		rgblight_set_layer_state(3, layer_state_cmp(state, _BG2));
+		rgblight_set_layer_state(4, layer_state_cmp(state, _MOUSE));
+		rgblight_set_layer_state(2, layer_state_cmp(state, _COMMANDOS));
 		return state;
 }
 
