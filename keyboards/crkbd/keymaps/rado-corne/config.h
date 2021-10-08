@@ -37,4 +37,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  
 #define RGBLIGHT_LAYERS
 #define RGBLIGHT_SLEEP
-#define UNICODE_KEY_LNX LCTL(LSFT(KC_U))
+//#define UNICODE_KEY_LNX LCTL(LSFT(KC_U))
+#define UNICODE_SELECTED_MODES UC_MAC, UC_LNX

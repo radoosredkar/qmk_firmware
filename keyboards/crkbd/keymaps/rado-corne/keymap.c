@@ -97,7 +97,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 		[TD_PROGRAMMING] = ACTION_TAP_DANCE_LAYER_TOGGLE(KC_P, 6),
 		[TD_GAMMING] = ACTION_TAP_DANCE_LAYER_TOGGLE(KC_G, 7) 
 };
-**/
+*UC_MOD*/
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		[_QWERTY] = LAYOUT_split_3x6_3(
 						KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, 						KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC, 
@@ -136,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 						KC_LGUI,TG(5),KC_SPC,										KC_ENT,TG(5),KC_RALT
 						),
 		[_PROGRAMMING] = LAYOUT_split_3x6_3(
-						KC_TAB, LALT(KC_INS), LCA(KC_M), LSA(KC_ENT), KC_NO, KC_NO, 		KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+						KC_TAB, LALT(KC_INS), LCA(KC_M), LSA(KC_ENT), KC_NO, KC_NO, 		KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, UC_MOD, 
 						LCTL_T(KC_ESC), KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 					KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_NO, KC_NO, 
 						KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 						KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TAB, 
 						KC_LGUI, TG(6), KC_NO, 												KC_ENT, TG(6), KC_RALT),
